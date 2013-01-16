@@ -1,4 +1,4 @@
 android_device_rikomagic_mk802
 ==============================
 
-Jelly Bean branch
+cm 10.1 branch
