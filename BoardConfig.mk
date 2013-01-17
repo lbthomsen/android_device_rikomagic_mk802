@@ -13,8 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-TARGET_BOARD_PLATFORM := exDroid
-TARGET_BOOTLOADER_BOARD_NAME := crane
+TARGET_BOARD_PLATFORM := sun4i
+TARGET_BOOTLOADER_BOARD_NAME := a10
 
 USE_CAMERA_STUB := false
 HAVE_HTC_AUDIO_DRIVER := true
@@ -91,7 +91,11 @@ WIFI_DRIVER_FW_PATH_PARAM := ""
 TARGET_CUSTOM_WIFI := ../../hardware/realtek/wlan/wifi_realtek.c
 
 # Beware: set only prebuilt OR source+config
-TARGET_PREBUILT_KERNEL := device/rikomagic/mk802/kernel
+#TARGET_PREBUILT_KERNEL := device/rikomagic/mk802/kernel
+TARGET_KERNEL_CUSTOM_TOOLCHAIN : = arm-eabi-4.4.3
+TARGET_KERNEL_SOURCE := $(ANDROID_BUILD_TOP)/kernel/rikomagic/common
+TARGET_KERNEL_CONFIG := sun4i_aurora_defconfig
+TARGET_KERNEL_MODULES_EXT := $(ANDROID_BUILD_TOP)/device/rikomagic/mk802/prebuilt/lib/modules
 BOARD_KERNEL_BASE := 0x40000000
 BOARD_KERNEL_CMDLINE := console=ttyS0,115200 rw init=/init loglevel=8
 
