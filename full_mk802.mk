@@ -15,21 +15,11 @@
 # Inherit from those products. Most specific first.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 $(call inherit-product, device/rikomagic/mk802/mk802.mk)
-$(call inherit-product, device/rikomagic/mk802/libraries/Android.mk)
-$(call inherit-product, device/rikomagic/mk802/packages/Android.mk)
 $(call inherit-product, frameworks/native/build/tablet-dalvik-heap.mk)
-$(call inherit-product, vendor/cm/config/gsm.mk)
-$(call inherit-product-if-exists, vendor/rikomagic/mk802/mk802-vendor.mk)
 
 # Set those variables here to overwrite the inherited values.
 PRODUCT_NAME := full_mk802
 PRODUCT_DEVICE := mk802
 PRODUCT_BRAND := Rikomagic
-PRODUCT_MODEL := mk802
+PRODUCT_MODEL := MK802
 PRODUCT_MANUFACTURER := Rikomagic
-
-
-
-
-
-
