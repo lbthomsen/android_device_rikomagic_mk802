@@ -81,8 +81,8 @@ BOARD_USES_LEGACY_RIL := true
 ENABLE_WEBGL := true
 # Extra : to build external modules sources
 TARGET_KERNEL_CUSTOM_TOOLCHAIN := arm-eabi-4.4.3
-TARGET_KERNEL_SOURCE := $(ANDROID_BUILD_TOP)/kernel/allwinner/a10
-TARGET_KERNEL_CONFIG := sun4i_aurora_defconfig
+TARGET_KERNEL_SOURCE := $(ANDROID_BUILD_TOP)/kernel/rikomagic/common
+TARGET_KERNEL_CONFIG := sun4i_crane_defconfig
 TARGET_KERNEL_MODULES_EXT := $(ANDROID_BUILD_TOP)/device/rikomagic/mk802/prebuilt/lib/modules
 BOARD_KERNEL_CMDLINE := console=ttyS0,115200 rw init=/init
 BOARD_KERNEL_BASE := 0x40000000
