@@ -36,3 +36,5 @@ touch.pressure.scale = 0.005
 
 # Orientation
 touch.orientation.calibration = none
+
+

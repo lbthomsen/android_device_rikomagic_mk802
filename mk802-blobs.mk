@@ -12,81 +12,85 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-device_path = device/rikomagic/mk802
-
-DEVICE_PREBUILT := ${device_path}/prebuilt
-
-# Ramdisk
+# Update Me
 PRODUCT_COPY_FILES += \
-	device/rikomagic/mk802/ramdisk/init.sun4i.rc:root/init.sun4i.rc \
-	device/rikomagic/mk802/ramdisk/init.sun4i.usb.rc:root/init.sun4i.usb.rc \
-	device/rikomagic/mk802/ramdisk/init.trace.rc:root/init.trace.rc \
-	device/rikomagic/mk802/ramdisk/ueventd.rc:root/ueventd.rc \
-	device/rikomagic/mk802/ramdisk/ueventd.sun4i.rc:root/ueventd.sun4i.rc \
-	device/rikomagic/mk802/ramdisk/adbd:root/sbin/adbd \
+       device/rikomagic/mk802/prebuilt/app/UpdateMe.apk:system/app/UpdateMe.apk \
+       device/rikomagic/mk802/prebuilt/update_me.xml:system/update_me.xml
 
-# EGL Stuff
+# /system/bin
 PRODUCT_COPY_FILES += \
-	$(DEVICE_PREBUILT)/lib/egl/libEGL_mali.so:system/lib/egl/libEGL_mali.so \
-	$(DEVICE_PREBUILT)/lib/egl/libGLESv1_CM_mali.so:system/lib/egl/libGLESv1_CM_mali.so \
-	$(DEVICE_PREBUILT)/lib/egl/libGLESv2_mali.so:system/lib/egl/libGLESv2_mali.so \
-	$(DEVICE_PREBUILT)/lib/libMali.so:system/lib/libMali.so \
-	$(DEVICE_PREBUILT)/lib/libUMP.so:system/lib/libUMP.so \
-	$(DEVICE_PREBUILT)/lib/libMali.so:obj/lib/libMali.so \
-	$(DEVICE_PREBUILT)/lib/libUMP.so:obj/lib/libUMP.so \
+	device/rikomagic/mk802/prebuilt/bin/fsck.exfat:system/bin/fsck.exfat \
+	device/rikomagic/mk802/prebuilt/bin/mkfs.exfat:system/bin/mkfs.exfat \
+	device/rikomagic/mk802/prebuilt/bin/mount.exfat:system/bin/mount.exfat \
+	device/rikomagic/mk802/prebuilt/bin/ntfs-3g:system/bin/ntfs-3g \
+	device/rikomagic/mk802/prebuilt/bin/ntfs-3g.probe:system/bin/ntfs-3g.probe \
+	device/rikomagic/mk802/prebuilt/bin/mkntfs:system/bin/mkntfs \
+	device/rikomagic/mk802/prebuilt/bin/reboot-recovery.sh:system/bin/reboot-recovery.sh \
+	device/rikomagic/mk802/prebuilt/bin/usb_modeswitch:system/bin/usb_modeswitch \
+	device/rikomagic/mk802/prebuilt/bin/rild:system/bin/rild
 
-# Camera
+# /system/etc
 PRODUCT_COPY_FILES += \
-	$(DEVICE_PREBUILT)/etc/camera.cfg:system/etc/camera.cfg \
-        $(DEVICE_PREBUILT)/etc/media_profiles.xml:system/etc/media_profiles.xml 
+	device/rikomagic/mk802/prebuilt/etc/ppp/ip-down:system/etc/ppp/ip-down \
+	device/rikomagic/mk802/prebuilt/etc/ppp/ip-up:system/etc/ppp/ip-up \
+	device/rikomagic/mk802/prebuilt/etc/ppp/call-pppd:system/etc/ppp/call-pppd \
+	device/rikomagic/mk802/prebuilt/etc/firmware/ath3k-1.fw:system/etc/firmware/ath3k-1.fw \
+	device/rikomagic/mk802/prebuilt/etc/firmware/ath3k-1.fw:system/vendor/firmware/ath3k-1.fw \
+	device/rikomagic/mk802/prebuilt/etc/3g_dongle.cfg:system/etc/3g_dongle.cfg \
+	device/rikomagic/mk802/prebuilt/etc/camera.cfg:system/etc/camera.cfg \
+	device/rikomagic/mk802/prebuilt/etc/gps.conf:system/etc/gps.conf \
+	device/rikomagic/mk802/prebuilt/etc/media_profiles.xml:system/etc/media_profiles.xml \
+	device/rikomagic/mk802/prebuilt/etc/usb_modeswitch.sh:system/etc/usb_modeswitch.sh \
+	device/rikomagic/mk802/prebuilt/etc/vold.fstab:system/etc/vold.fstab
 
-# will be removed in future
 PRODUCT_COPY_FILES += \
-	$(DEVICE_PREBUILT)/lib/hw/gps.sun4i.so:system/lib/hw/gps.sun4i.so \
-	$(DEVICE_PREBUILT)/lib/modules/goodix_touch.ko:system/lib/modules/goodix_touch.ko \
+	$(call find-copy-subdir-files,*,device/rikomagic/mk802/prebuilt/etc/init.d,system/etc/init.d)
 
-# OTG/3G stuff
 PRODUCT_COPY_FILES += \
-        $(DEVICE_PREBUILT)/bin/u3gmonitor:system/bin/u3gmonitor \
-        $(DEVICE_PREBUILT)/etc/3g_dongle.cfg:system/etc/3g_dongle.cfg \
-        $(DEVICE_PREBUILT)/bin/usb_modeswitch:system/bin/usb_modeswitch \
-        $(DEVICE_PREBUILT)/etc/usb_modeswitch.sh:system/etc/usb_modeswitch.sh \
-        $(DEVICE_PREBUILT)/bin/chat:system/bin/chat \
-        $(DEVICE_PREBUILT)/etc/ppp/call-pppd:system/etc/ppp/call-pppd \
-        $(DEVICE_PREBUILT)/etc/ppp/ip-down:system/etc/ppp/ip-down \
-        $(DEVICE_PREBUILT)/etc/ppp/ip-up:system/etc/ppp/ip-up 
+	$(call find-copy-subdir-files,*,device/rikomagic/mk802/prebuilt/etc/usb_modeswitch.d,system/etc/usb_modeswitch.d)
 
-PRODUCT_COPY_FILES += $(shell test -d $(DEVICE_PREBUILT)/etc/usb_modeswitch.d && \
-	find $(DEVICE_PREBUILT)/etc/usb_modeswitch.d -name '*' \
-	-printf '%p:system/etc/usb_modeswitch.d/%f ')
-
-# Other stuff
+# /system/lib
 PRODUCT_COPY_FILES += \
-	$(DEVICE_PREBUILT)/usr/keylayout/hv_keypad.kl:system/usr/keylayout/hv_keypad.kl \
-	$(DEVICE_PREBUILT)/usr/keylayout/axp20-supplyer.kl:system/usr/keylayout/axp20-supplyer.kl \
-	$(DEVICE_PREBUILT)/usr/keylayout/sun4i-keyboard.kl:system/usr/keylayout/sun4i-keyboard.kl \
-	$(DEVICE_PREBUILT)/usr/idc/ft5x_ts.idc:system/usr/idc/ft5x_ts.idc \
-	$(DEVICE_PREBUILT)/usr/idc/gt80x.idc:system/usr/idc/gt80x.idc \
-	$(DEVICE_PREBUILT)/usr/idc/qwerty.idc:system/usr/idc/qwerty.idc \
-	$(DEVICE_PREBUILT)/usr/idc/qwerty2.idc:system/usr/idc/qwerty2.idc \
-	$(DEVICE_PREBUILT)/vendor/firmware/ft5206-1024X600.bin:system/vendor/firmware/ft5206-1024X600.bin \
-	$(DEVICE_PREBUILT)/vendor/firmware/ft5206-sc3013-1024X600.bin:system/vendor/firmware/ft5206-sc3013-1024X600.bin \
-	$(DEVICE_PREBUILT)/vendor/firmware/ft5206-sc3017-1024X600.bin:system/vendor/firmware/ft5206-sc3017-1024X600.bin \
-	$(DEVICE_PREBUILT)/etc/vold.fstab:system/etc/vold.fstab \
-	$(DEVICE_PREBUILT)/etc/gps.conf:system/etc/gps.conf \
-	$(DEVICE_PREBUILT)/etc/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
-	$(DEVICE_PREBUILT)/lib/liballwinner-ril.so:system/lib/liballwinner-ril.so \
-	$(DEVICE_PREBUILT)/bin/ntfs-3g:system/bin/ntfs-3g \
-	$(DEVICE_PREBUILT)/bin/ntfs-3g.probe:system/bin/ntfs-3g.probe \
-	$(DEVICE_PREBUILT)/bin/mkfs.exfat:system/bin/mkfs.exfat \
-	$(DEVICE_PREBUILT)/bin/mount.exfat:system/bin/mount.exfat \
- 	$(DEVICE_PREBUILT)/bin/fsck.exfat:system/bin/fsck.exfat \
-	$(DEVICE_PREBUILT)/etc/media_codecs.xml:system/etc/media_codecs.xml \
-	${device_path}/audio/audio_policy.conf:system/etc/audio_policy.conf \
+	device/rikomagic/mk802/prebuilt/lib/egl/libEGL_mali.so:system/lib/egl/libEGL_mali.so \
+	device/rikomagic/mk802/prebuilt/lib/egl/libGLES_android.so:system/lib/egl/libGLES_android.so \
+	device/rikomagic/mk802/prebuilt/lib/egl/libGLESv1_CM_mali.so:system/lib/egl/libGLESv1_CM_mali.so \
+	device/rikomagic/mk802/prebuilt/lib/egl/libGLESv2_mali.so:system/lib/egl/libGLESv2_mali.so \
+	device/rikomagic/mk802/prebuilt/lib/liballwinner-ril.so:system/lib/liballwinner-ril.so \
+	device/rikomagic/mk802/prebuilt/lib/hw/camera.exDroid.so:system/lib/hw/camera.exDroid.so \
+	device/rikomagic/mk802/prebuilt/lib/hw/sensors.exDroid.so:system/lib/hw/sensors.exDroid.so \
+	device/rikomagic/mk802/prebuilt/lib/libMali.so:system/lib/libMali.so \
+	device/rikomagic/mk802/prebuilt/lib/libUMP.so:system/lib/libUMP.so \
+	device/rikomagic/mk802/prebuilt/lib/libMali.so:obj/lib/libMali.so \
+	device/rikomagic/mk802/prebuilt/lib/libUMP.so:obj/lib/libUMP.so
 
-
-# New CM9 backup list system (addon.d)
+# /system/usr
 PRODUCT_COPY_FILES += \
-	${device_path}/releasetools/addon.d/70-gapps.sh:system/addon.d/70-gapps.sh \
+	device/rikomagic/mk802/prebuilt/usr/idc/ft5x_ts.idc:system/usr/idc/ft5x_ts.idc \
+	device/rikomagic/mk802/prebuilt/usr/idc/Goodix-TS-board-3.idc:system/usr/idc/Goodix-TS-board-3.idc \
+	device/rikomagic/mk802/prebuilt/usr/keylayout/axp20-supplyer.kl:system/usr/keylayout/axp20-supplyer.kl \
+	device/rikomagic/mk802/prebuilt/usr/keylayout/sun4i-keyboard.kl:system/usr/keylayout/sun4i-keyboard.kl \
+	device/rikomagic/mk802/prebuilt/usr/icu/icudt46l.dat:system/usr/icu/icudt46l.dat
 
-#end of a10-blobs.mk
+# temporary prebuilt wpa_supplicant
+PRODUCT_COPY_FILES += \
+	device/rikomagic/mk802/prebuilt/etc/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf
+
+# prebuilt kernel modules
+#PRODUCT_COPY_FILES += \
+#	$(call find-copy-subdir-files,*,device/rikomagic/mk802/prebuilt/vendor/modules,system/vendor/modules)
+
+PRODUCT_COPY_FILES += \
+	$(call find-copy-subdir-files,*,device/rikomagic/mk802/prebuilt/lib/modules,system/lib/modules)
+
+# HACK by turl: Create some intermediate files to link with libMali/libUMP
+$(shell mkdir -p out/target/product/mk802/obj/SHARED_LIBRARIES/libMali_intermediates)
+$(shell mkdir -p out/target/product/mk802/obj/SHARED_LIBRARIES/libUMP_intermediates)
+$(shell touch out/target/product/mk802/obj/SHARED_LIBRARIES/libMali_intermediates/export_includes)
+$(shell touch out/target/product/mk802/obj/SHARED_LIBRARIES/libUMP_intermediates/export_includes)
+
+# OMX codec support
+PRODUCT_COPY_FILES += device/rikomagic/mk802/prebuilt/etc/media_codecs.xml:system/etc/media_codecs.xml
+
+# Audio policy
+PRODUCT_COPY_FILES += device/rikomagic/mk802/libraries/audio/audio_policy.conf:system/etc/audio_policy.conf
+
