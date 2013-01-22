@@ -92,9 +92,9 @@ WIFI_DRIVER_FW_PATH_PARAM := ""
 TARGET_CUSTOM_WIFI := ../../hardware/realtek/wlan/wifi_realtek.c
 
 # Beware: set only prebuilt OR source+config
-#TARGET_PREBUILT_KERNEL := device/crane/mk802/kernel
-TARGET_KERNEL_SOURCE := $(ANDROID_BUILD_TOP)/kernel/rikomagic/common
-TARGET_KERNEL_CONFIG := sun4i_mk802_defconfig
+TARGET_PREBUILT_KERNEL := device/rikomagic/mk802/kernel
+#TARGET_KERNEL_SOURCE := $(ANDROID_BUILD_TOP)/kernel/rikomagic/common
+#TARGET_KERNEL_CONFIG := sun4i_mk802_defconfig
 BOARD_KERNEL_BASE := 0x40000000
 BOARD_KERNEL_CMDLINE := console=ttyS0,115200 rw init=/init loglevel=8
 
